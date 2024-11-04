@@ -1,6 +1,18 @@
 const btnAdicionarTarefa = document.querySelector('.app__button--add-task');
-const formAdicionarTarefa = document.querySelector('.app__form-add-task hidden');
+const formAdicionarTarefa = document.querySelector('.app__form-add-task');
+const textArea = document.querySelector('.app__form-textarea');
 
-btnAdicionarTarefa.addEventListener('click', ()=> {
-    formAdicionarTarefa.classList.toggle('hidden')
+const tarefas = [];
+
+btnAdicionarTarefa.addEventListener('click', () => {
+    formAdicionarTarefa.classList.toggle('hidden');
 })
+
+formAdicionarTarefa.addEventListener('submit', (evento) =>{
+    evento.preventDefault();
+    const tarefa = {
+        descricao: textArea.value
+    };
+    tarefas.push(tarefa);
+    localStorage.setItem('tarefa', JSON.stringify(tarefas));
+});
