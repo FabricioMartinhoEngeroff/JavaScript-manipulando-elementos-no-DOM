@@ -103,3 +103,4 @@ document.addEventListener('FocoFinalizado', () => {
         liTarefaSelecionada.querySelector('button').setAttribute('disabled', 'disabled')
     }
 })
+
