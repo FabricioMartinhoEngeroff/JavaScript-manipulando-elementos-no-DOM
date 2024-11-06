@@ -510,3 +510,18 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 0.8;
     cursor: not-allowed;
 }
+
+.app__form-footer__button {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #0056b3;
+    color: white;
+}
+
+.app__form-footer__button:disabled {
+    background-color: #bbb;
+    cursor: not-allowed;
+}
