@@ -10,6 +10,7 @@ const botaoSalvar = document.querySelector('.app__form-footer__button--confirm')
 const botaoCancelar = document.querySelector('.app__form-footer__button--cancel');
 const botaoDeletar = document.querySelector('.app__form-footer__button--delete');
 
+
 let tarefas = JSON.parse(localStorage.getItem('tarefas') || '[]');
 let tarefaSelecionada = null;
 let liDaTarefaSelecionada = null;

@@ -8,8 +8,10 @@ const botoes = document.querySelectorAll('.app__card-button')
 const startPauseBt = document.querySelector('#start-pause')
 const musicaFocoInput = document.querySelector('#alternar-musica')
 const iniciarOuPausarBt = document.querySelector('#start-pause span')
-const iniciarOuPausarBtIcone = document.querySelector(".app__card-primary-butto-icon") 
+const iniciarOuPausarBtIcone = document.querySelector('.app__card-primary-butto-icon') 
 const tempoNaTela = document.querySelector('#timer')
+const atividadeEmAndamento = document.querySelector('.app__section-active-task-description')
+
 
 const musica = new Audio('/sons/luna-rise-part-one.mp3')
 const audioPlay = new Audio('/sons/play.wav');
@@ -84,6 +86,7 @@ const contagemRegressiva = () => {
             const evento = new CustomEvent('FocoFinalizado')
             document.dispatchEvent(evento)
         }
+        atividadeEmAndamento.textContent = ''; 
         zerar()
         return
     }
