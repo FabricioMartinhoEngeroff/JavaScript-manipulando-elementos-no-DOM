@@ -10,7 +10,6 @@ const botaoSalvar = document.querySelector('.app__form-footer__button--confirm')
 const botaoCancelar = document.querySelector('.app__form-footer__button--cancel');
 const botaoDeletar = document.querySelector('.app__form-footer__button--delete');
 
-
 let tarefas = JSON.parse(localStorage.getItem('tarefas') || '[]');
 let tarefaSelecionada = null;
 let liDaTarefaSelecionada = null;
@@ -62,12 +61,12 @@ function criarElementoTarefa(tarefa) {
     li.append(paragrafo);
     li.append(botao);
 
-    if (tarefa.completa) {
-        li.classList.add('app__section-task-list-item-complete');
-        botao.setAttribute('disabled', 'disabled');
-    } else {
-        li.onclick = () => selecionarTarefa(li, tarefa);
-    }
+   if (tarefa.completa) {
+    li.classList.add('app__section-task-list-item-complete');
+    botao.setAttribute('disabled', 'disabled');
+} else {
+    li.onclick = () => selecionarTarefa(li, tarefa);
+}
 
     return li;
 }
@@ -90,7 +89,7 @@ const selecionarTarefa = (li, tarefa) => {
 
 botaoAdicionarTarefa.addEventListener('click', () => {
     formularioAdicionarTarefa.classList.toggle('hidden');
-    areaDoTexto.value = ''; // Limpa o campo de texto ao abrir o formulário
+    areaDoTexto.value = '';
 });
 
 formularioAdicionarTarefa.addEventListener('submit', (evento) => {
@@ -106,8 +105,8 @@ formularioAdicionarTarefa.addEventListener('submit', (evento) => {
     const elementoTarefa = criarElementoTarefa(tarefa);
     ulTarefasExibidas.append(elementoTarefa);
     atualizarTarefas();
-    areaDoTexto.value = ''; // Limpa o campo após adicionar
-    formularioAdicionarTarefa.classList.add('hidden'); // Fecha o formulário
+    areaDoTexto.value = ''; 
+    formularioAdicionarTarefa.classList.add('hidden'); 
 });
 
 botaoSalvar.addEventListener('click', () => {
@@ -118,7 +117,7 @@ botaoSalvar.addEventListener('click', () => {
             liDaTarefaSelecionada.querySelector('p').textContent = novaDescricao;
             atualizarTarefas();
             formularioAdicionarTarefa.classList.add('hidden');
-            areaDoTexto.value = ''; // Limpa o campo de texto após salvar
+            areaDoTexto.value = '';
         }
     }
 });
@@ -145,18 +144,23 @@ botaoDeletar.addEventListener('click', () => {
 document.addEventListener('FocoFinalizado', () => {
     if (tarefaSelecionada && liDaTarefaSelecionada) {
         liDaTarefaSelecionada.classList.remove('app__section-task-list-item-active');
-        liDaTarefaSelecionada.classList.add('app__section-task-list-item-complete');
+        liDaTarefaSelecionada.classList.add('app__section-task-list-item-complete', 'app__section-task-expired');
         liDaTarefaSelecionada.querySelector('button').setAttribute('disabled', 'disabled');
         tarefaSelecionada.completa = true;
         atualizarTarefas();
+
+        descricaoDeTarefaAtiva.textContent = '';
     }
 });
 
-const removerTarefas = (somenteCompletas = false) => {
+const removerTarefas = (somenteCompletas) => {
     const seletor = somenteCompletas ? ".app__section-task-list-item-complete" : ".app__section-task-list-item";
-    document.querySelectorAll(seletor).forEach(elemento => elemento.remove());
-    tarefas = tarefas.filter(tarefa => !tarefa.completa || !somenteCompletas);
-};
+    document.querySelectorAll(seletor).forEach(elemento => {
+        elemento.remove();
+    });
+    tarefas = somenteCompletas ? tarefas.filter(tarefa => !tarefa.completa) : [];
+    atualizarTarefas();
+}
 
-botaoRemoverConcluidas.onclick = () => removerTarefas(true);
-botaoRemoverTodas.onclick = () => removerTarefas();
+document.getElementById('btn-remover-concluidas').onclick = () => removerTarefas(true);
+document.getElementById('btn-remover-todas').onclick = () => removerTarefas(false);

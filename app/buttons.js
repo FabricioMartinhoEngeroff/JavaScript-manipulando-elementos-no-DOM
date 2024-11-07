@@ -13,6 +13,7 @@ const tempoNaTela = document.querySelector('#timer')
 const atividadeEmAndamento = document.querySelector('.app__section-active-task-description')
 
 
+
 const musica = new Audio('/sons/luna-rise-part-one.mp3')
 const audioPlay = new Audio('/sons/play.wav');
 const audioPausa = new Audio('/sons/pause.mp3');
@@ -78,20 +79,29 @@ function alterarContexto(contexto) {
 }
 
 const contagemRegressiva = () => {
-    if(tempoDecorridoEmSegundos <= 0){
-        audioTempoFinalizado.play()
-        alert('Tempo finalizado!')
-        const focoAtivo = html.getAttribute('data-contexto') == 'foco'
-        if (focoAtivo) {
-            const evento = new CustomEvent('FocoFinalizado')
-            document.dispatchEvent(evento)
-        }
-        atividadeEmAndamento.textContent = ''; 
-        zerar()
+    if (tempoDecorridoEmSegundos <= 0) {
+        finalizarTempo()
         return
     }
     tempoDecorridoEmSegundos -= 1
     mostrarTempo()
+}
+
+const finalizarTempo = () => {
+    try {
+        audioTempoFinalizado.play()
+    } catch (error) {
+        console.error("Erro ao tentar tocar o áudio:", error)
+    }
+    
+    alert('Tempo finalizado!')
+    if (document.querySelector('[data-contexto="foco"]')) {
+        const evento = new CustomEvent('FocoFinalizado')
+        document.dispatchEvent(evento)
+    }
+
+    atividadeEmAndamento.textContent = ''
+    zerar()
 }
 
 startPauseBt.addEventListener('click', iniciarOuPausar)

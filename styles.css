@@ -408,7 +408,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .app__section-task-list-item-complete.app__section-task-list-item {
-    background: var(--fundo-card-concludo);
+    background: green;
+    color: white;
+    border: 2px solid darkgreen;
     cursor: inherit;
 }
 
@@ -524,4 +526,9 @@ h1, h2, h3, h4, h5, h6 {
 .app__form-footer__button:disabled {
     background-color: #bbb;
     cursor: not-allowed;
+}
+
+.app__section-task-expired {
+    background-color: #ffcccc; /* Cor de fundo vermelho claro */
+    color: #ff0000; /* Texto vermelho */
 }
