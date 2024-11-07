@@ -39,7 +39,7 @@
             <div class="app__card">
                 <ul class="app__card-list">
                     <li class="app__card-list-item">
-                        <button data-contexto="foco" class="app__card-button app__card-button--foco active">Foco</button>
+                        <button data-contexto="foco" class="app__card-button app__card-button--foco active">Tempo de Foca na Tarefa</button>
                     </li>
                     <li class="app__card-list-item">
                         <button data-contexto="short" class="app__card-button app__card-button--curto">Descanso curto</button>
@@ -70,6 +70,27 @@
                 </div>
             </div>
         </section>
+        <section class="app__section-settings">
+            <h2>Configurações de Tempo</h2>
+            <div class="app__time-settings">
+                <div class="app__time-setting">
+                    <label for="foco-time">Tempo Foco na Tarefa:</label>
+                    <input type="number" id="foco-time" value="25" min="5" max="60" step="5">
+                    <span>minutos</span>
+                </div>
+                <div class="app__time-setting">
+                    <label for="short-time">Descanso Curto:</label>
+                    <input type="number" id="short-time" value="5" min="1" max="30" step="1">
+                    <span>minutos</span>
+                </div>
+                <div class="app__time-setting">
+                    <label for="long-time">Descanso Longo:</label>
+                    <input type="number" id="long-time" value="15" min="1" max="60" step="5">
+                    <span>minutos</span>
+                </div>
+            </div>
+        </section>
+        
         <section class="app__section-task-container">
             <div class="app__section-task-content">
                 <header class="app__section-active-task">
@@ -127,7 +148,7 @@
 
         <footer class="app__footer">
             <p class="app__footer-text">
-                Projeto fictício e sem fins comerciais. Imagens geradas por IA no Adobe Firefly.Desenvolvido por Alura. 
+                Projeto fictício e sem fins comerciais. Imagens geradas por IA no Adobe Firefly.Desenvolvido por Alura.
             </p>
         </footer>
         <script src="app/buttons.js"></script>
